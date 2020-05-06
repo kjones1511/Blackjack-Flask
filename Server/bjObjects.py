@@ -115,6 +115,7 @@ class Deck:
 
 class Player:
 	def __init__(self, name, initial_money):
+		self.cookie = 0
 		self.name = name
 		self.hands = []
 		self.currentHand = [Hand()] #will be array of hands, starts with 1 due to needing to access element 0

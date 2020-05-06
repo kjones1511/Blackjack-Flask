@@ -1,3 +1,4 @@
+from API import *
 from flask import Flask, render_template, request, jsonify
 from bjObjects import *
 # Create some test data for our catalog in the form of a list of dictionaries.
@@ -51,6 +52,9 @@ def serveCard():
     x = json.dumps(tCard.__dict__, default=lambda o: o.__dict__)
     return jsonify(x)
 
+@app.route("/json", methods=["POST"])
+def json():
+    return APIjson(request)
 
 if __name__ == "__main__":
     app.run('localhost',5000,debug=True)
