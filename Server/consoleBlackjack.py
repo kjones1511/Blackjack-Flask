@@ -18,7 +18,7 @@ dealerStandBoundary = 17
 
 def game():
 	#get mongoDB collection pointer
-	coll = LaunchConnection()
+	coll = LaunchCollConnection()
 
 	#todo: figure out how to handle Dealer in dealFirstHand()
 	dealerHand = Hand()

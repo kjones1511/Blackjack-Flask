@@ -2,7 +2,7 @@ import unittest
 from bjObjects import *
 
 #class TestHand(TestCase):
-class TestDeck(unittest.TestCase):
+class TestPlayer(unittest.TestCase):
     #counts number of matching cards, if greater than 45 assuming deck didn't shuffle
     #assumes only testing for cases that pass Hand.splitcheck
     #todo: add test case for multiple hands in split

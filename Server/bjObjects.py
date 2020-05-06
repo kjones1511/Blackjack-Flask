@@ -1,6 +1,7 @@
 import random
 import os
 import time
+from datetime import datetime
 import json
 #todo: destructors?
 
@@ -35,6 +36,8 @@ class Card:
 class Hand:
 	def __init__(self):
 		self.hand = []
+		#todo: re-add datetime once mDB implemented. Currently, won't work with lambda dict collapse
+		#self.startTime = datetime.now(tz=None)
 		self.blackjack = 0
 		self.win = 0
 		self.split = 0
@@ -112,6 +115,7 @@ class Deck:
 
 class Player:
 	def __init__(self, name, initial_money):
+		self.cookie = 0
 		self.name = name
 		self.hands = []
 		self.currentHand = [Hand()] #will be array of hands, starts with 1 due to needing to access element 0

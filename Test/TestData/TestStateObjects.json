@@ -1,0 +1,11 @@
+{
+	"test1": {"name": "Julian", "message": "Posting JSON data to Flask!"},
+	"gameInfo": {
+		"state": "",
+		"choice": "",
+		"casino": "La Casa De Mi Padre",
+		"deckCount": 2,
+		"dealerStandBoundary": 17,
+		"player": ""
+	}
+}
