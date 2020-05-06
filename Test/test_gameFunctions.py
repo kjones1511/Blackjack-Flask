@@ -1,5 +1,5 @@
 import unittest
-from bjObjects import *
+from GameFunctions import *
 
 #test array
 # for test_str, checks that the card object prints the string in 2nd element of array pairs

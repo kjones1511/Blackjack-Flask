@@ -160,6 +160,8 @@ def winsScheme(score,money,winnings,s):
         money = money + winnings
         return winnings,money
 
+
+#todo: delete this function, overkill
 def BlackJack(score):
     """Returns True if the score is exaclty 21"""
     if score == 21:
@@ -167,6 +169,8 @@ def BlackJack(score):
     else:
         return False
 
+
+#todo: delete this function, overkill
 def Bust(score):
     """Returns True if the score is over 21"""
     if score > 21:

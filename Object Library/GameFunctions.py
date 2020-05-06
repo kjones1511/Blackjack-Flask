@@ -1,12 +1,5 @@
-import os
 import random
 from bjObjects import *
-
-def clear():
-	if os.name == 'nt':
-		os.system('CLS')
-	if os.name == 'posix':
-		os.system('clear')
 
 def initializeDeck(deckCount):
 	deck = Deck(deckCount)
@@ -21,12 +14,13 @@ def initializeOnePlayer(players, data, casino):
 	data["player"] = playerName
 	data["casino"] = casino
 
-def dealFirstHand(players, dealerHand, deck):
+def dealHand(players, dealerHand, deck):
 	# deal first hands
 	for player in players:
-		player.currentHand.append(Hand())
-		player.currentHand[0].deal(deck)
-	dealerHand.deal(deck)
+		player.currentHand = [Hand()]
+		player.currentHand[0].newHand(deck)
+	dealerHand.newHand(deck)
+
 
 #if happy with print, delete comments
 def print_results(dealerHand, player_hand): #name, hand):
@@ -77,3 +71,32 @@ def score(dealerHand, playerHand):
 		playerHand.win = 2
 	else:
 		print ("something has gone wrong with score() if this appears")
+
+def playerDecisionHandling (thisHand, dealerHand, player, deck):
+	choice = ""
+	doubleState = True
+	while choice not in ["s", "d", "q"] and thisHand.total() < 21:
+		print("The dealer is showing a " + str(dealerHand.hand[0]))
+		print("Player:" + player.name + "\nHand:" + str(thisHand) + "\nScore:" + str(thisHand.total()))
+		if doubleState:
+			choice = input("Do you want to [D]ouble down, [H]it, or [S]tand: ").lower()
+			doubleState = False
+		else:
+			choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
+		# clear()
+		if choice == "h":
+			thisHand.hitState = 1
+			thisHand.hit(deck)
+			print("your new card is: " + str(thisHand.hand[-1]) + "\nfor a total of " + str(thisHand.total()))
+		elif choice == "s":
+			print(player.name + " stands")
+		elif choice == "d":
+			thisHand.double = 1
+			thisHand.hit(deck)
+			print("your new card is: " + str(thisHand.hand[-1]) + "\nfor a total of " + str(thisHand.total()))
+		time.sleep(1)
+		clear()
+
+def	dealerHitlogic(dealerHand, dealerStandBoundary, deck):
+	while dealerHand.total() < dealerStandBoundary:
+		dealerHand.hit(deck)
