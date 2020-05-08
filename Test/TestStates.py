@@ -1,5 +1,5 @@
 import unittest
-import States
+from States import *
 import json
 
 tPath = '/Users/kjones/PycharmProjects/Blackjack4/Test/TestData/TestStateObjects.json'
@@ -7,15 +7,13 @@ tJSON = {}
 with open(tPath) as file:
 	tJSON =json.load(file)
 
+#todo: build fixture with player array
 
 class TestStates(unittest.TestCase):
 
-	#todo: temp data test
-	def test_FlaskReturn(self):
-		# with open(tPath) as tJSON:
-		# 	dictionary = json.load(tJSON)
-		# 	print(dictionary['test1'])
-		print(tJSON['test1'])
+	#todo: make part of a fixture
+	def test_JSONDataLoads(self):
+		self.assertEqual(tJSON['test1'], {'name': 'Julian', 'message': 'Posting JSON data to Flask!'}, "test JSON didn't load")
 
 	#for later
 	def signIn(self):
@@ -25,8 +23,24 @@ class TestStates(unittest.TestCase):
 	def launchTable(self):
 		return
 
+	#ensures player ends up with new hand,
 	def test_startHand(self):
+		startHand()
 		self.fail()
+
+	def startHand(players, data, casino, deckCount):
+		# todo: figure out how to handle Dealer in dealFirstHand()
+		dealerHand = Hand()
+		# todo: add JS message welcoming start of game
+		###INITIALIZE phase
+		# creates a deck, with deckCount decided by casino
+		deck = initializeDeck(deckCount)
+		dealHand(players, dealerHand, deck)
+
+# TODO add code to record decks
+
+# TODO: 1 second of initially showing cards
+
 
 
 if __name__ == '__main__':

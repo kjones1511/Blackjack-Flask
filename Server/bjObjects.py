@@ -114,12 +114,12 @@ class Deck:
 		return self.cards.pop()
 
 class Player:
-	def __init__(self, name, initial_money):
-		self.cookie = 0
+	def __init__(self, name, cookie = "1", initial_money = 1000, hands = [], currentHand = [Hand()] ):
 		self.name = name
-		self.hands = []
-		self.currentHand = [Hand()] #will be array of hands, starts with 1 due to needing to access element 0
+		self.cookie = cookie
 		self.money = initial_money
+		self.hands = hands
+		self.currentHand = currentHand #will be array of hands, starts with 1 due to needing to access element 0
 
 	#handIndex assumes moving through currentHand index in ascending order
 	def split(self, handIndex,deck):

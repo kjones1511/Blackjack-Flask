@@ -6,13 +6,14 @@ def initializeDeck(deckCount):
 	deck.shuffle()
 	return deck
 
-#dependent on Player object, doesn't work in GameFunctions.py
-def initializeOnePlayer(players, data, casino):
-	playerName = choice = input("Enter Player Name:  ")
-	players.append(Player(playerName, 100))
-	# begin recording
-	data["player"] = playerName
-	data["casino"] = casino
+#todo: DOESNT WORK, ONLY CREATES  1 player
+	#builds and adds player object to players array
+	#have optional playerName for sake of testing
+def initializePlayers(gameInfo, playerName = ""):
+	if playerName == "":
+		playerName = choice = input("Enter Player Name:  ")
+	gameInfo["players"].append(Player(playerName, 1000))
+	#todo point to authentication token instead of string
 
 def dealHand(players, dealerHand, deck):
 	# deal first hands
