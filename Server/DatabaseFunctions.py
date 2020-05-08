@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     coll = LaunchCollConnection("Results","Players")
     result = requestPlayerMongo(coll, "Floppy","123123123")
-    
+
     #clears collection
     #coll.delete_many({})
 
