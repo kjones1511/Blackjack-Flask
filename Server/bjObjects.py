@@ -34,19 +34,30 @@ class Card:
 		return NotImplemented
 
 class Hand:
-	def __init__(self):
-		self.hand = []
+	# def __init__(self, *initial_data, **kwargs):
+	# 	for dictionary in initial_data:
+	# 		for key in dictionary:
+	# 			setattr(self, key, dictionary[key])
+	# 	for key in kwargs:
+	# 		setattr(self, key, kwargs[key])
+
+	#todo: current initializate unelegant
+	def __init__(self, hand=None, blackjack = 0, win = 0, split =0, double = 0, hitState =0, dealerHand = [], dealerScore = 0, score =0, originalScore =0, timestamp = ""):
+		if hand is None:
+			hand = []
+		self.hand = hand
 		#todo: re-add datetime once mDB implemented. Currently, won't work with lambda dict collapse
 		#self.startTime = datetime.now(tz=None)
-		self.blackjack = 0
-		self.win = 0
-		self.split = 0
-		self.double = 0
-		self.hitState = 0 # 0 if stand, 1 if hit
-		self.dealerHand = []
-		self.dealerScore = 0
-		self.score = 0
-		self.originalScore = 0
+		self.blackjack = blackjack
+		self.win = win
+		self.split = split
+		self.double = double
+		self.hitState = hitState # 0 if stand, 1 if hit
+		self.dealerHand = dealerHand
+		self.dealerScore = dealerScore
+		self.score = score
+		self.originalScore = originalScore
+		self.timestamp = timestamp
 
 	def newHand(self,deck):
 		self.hand.clear()
@@ -114,10 +125,14 @@ class Deck:
 		return self.cards.pop()
 
 class Player:
-	def __init__(self, name, cookie = "1", initial_money = 1000, hands = [], currentHand = [Hand()] ):
+	def __init__(self, name, cookie = "1", money = 1000, hands=None, currentHand=None):
+		if hands is None:
+			hands = []
+		if currentHand is None:
+			currentHand = [Hand()]
 		self.name = name
 		self.cookie = cookie
-		self.money = initial_money
+		self.money = money
 		self.hands = hands
 		self.currentHand = currentHand #will be array of hands, starts with 1 due to needing to access element 0
 

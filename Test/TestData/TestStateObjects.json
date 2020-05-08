@@ -10,12 +10,25 @@
 		"deck": ""
 	},
 	"playerDoc": {
-		"_id": {"$oid":"5eb223eafb974baed009c644"},
-			"player":"Kody",
+			"name":"Kody",
 			"cookie":"ASDKASDSDKSADADKAKDS",
-			"casino":"La Casa de mi Padre",
+			"money": 5555,
 			"hands":[
-				{"hand":[{"suit":"C","value":2},{"suit":"H","value":5},{"suit":"H","value":6},{"suit":"S","value":10}],
+				{"hand":
+				[{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"C","value":12}],
+					"blackjack":0,
+					"win":1,
+					"split":0,
+					"double":1,
+					"hitState":0,
+					"dealerHand":[{"suit":"H","value":8},{"suit":"C","value":9}],
+					"dealerScore":17,
+					"score":21,
+					"originalScore":11,
+					"timestamp":"8/20/2020 2:40 PM"}
+			],
+			"currentHand":
+				{"hand":[{"suit":"C","value":12},{"suit":"H","value":5}],
 				"blackjack":0,
 					"win":0,
 					"split":0,
@@ -30,31 +43,5 @@
 					"score":23,
 					"originalScore":7,
 					"timestamp":"8/20/2020 2:40 PM"
-				},
-				{"hand":[{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"C","value":12}],"blackjack":0,"win":1,"split":0,"double":1,"hitState":0,"dealerHand":[{"suit":"H","value":8},{"suit":"C","value":9}],"dealerScore":17,"score":21,"originalScore":11,"state":0}
-			]},
-	"2playerDoc": {
-		"_id": {"$oid":"5eb223eafb974baed009c644"},
-			"player":"Kody",
-			"cookie":"ASDKASDSDKSADADKAKDS",
-			"casino":"La Casa de mi Padre",
-			"hands":[
-				{"hand":[{"suit":"C","value":2},{"suit":"H","value":5},{"suit":"H","value":6},{"suit":"S","value":10}],
-				"blackjack":0,
-					"win":0,
-					"split":0,
-					"double":0,
-					"hitState":1,
-					"dealerHand":[
-						{"suit":"H","value":12},
-						{"suit":"D","value":6},
-						{"suit":"C","value":8}
-					],
-					"dealerScore":24,
-					"score":23,
-					"originalScore":7,
-					"timestamp":"8/20/2020 2:40 PM"
-				},
-				{"hand":[{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"C","value":12}],"blackjack":0,"win":1,"split":0,"double":1,"hitState":0,"dealerHand":[{"suit":"H","value":8},{"suit":"C","value":9}],"dealerScore":17,"score":21,"originalScore":11,"state":0}
-			]}
+				}}
 	}

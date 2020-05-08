@@ -4,6 +4,15 @@ from bjObjects import *
 import dns
 #import pprints
 
+
+tempDict = {'name': 'Floppy',
+            'cookie': '123123123',
+            'money': 1000,
+            'hands': [],
+            'currentHand': [
+                {'hand': [], 'blackjack': 0, 'win': 0, 'split': 0, 'double': 0, 'hitState': 0, 'dealerHand': [], 'dealerScore': 0, 'score': 0, 'originalScore': 0}
+            ]}
+
 # begin mongoDB connection, returns collection pointer
 def LaunchCollConnection(dbName, collName):
     client = MongoClient(
@@ -41,21 +50,47 @@ def initializePlayer(coll, player,cookie):
 
     #todo: returns JSON currently, needs to return object
 def requestPlayerMongo(coll, player,cookie):
-    result = coll.find({"name": player, "cookie": cookie})
+    result = coll.find({"name": player, "cookie": cookie},{"_id":0})
     #if result.retrieved != 0:
     for item in result:
         print(item)
 
-def MongoDecoder(studentDict):
-    return namedtuple('X', studentDict.keys())(*studentDict.values())
+#        print(item["currentHand"])
+
+    #will convert a dict Hand to Hand object, requires iterating over hand array
+def mongoCardDecoder(mongoDict):
+    print(mongoDict)
+    card = Card(**mongoDict)
+    return card
+
+def mongoHandDecoder(mongoDict):
+    fixCards = []
+    for card in mongoDict["hand"]:
+        fixCards.append(mongoCardDecoder(card))
+    mongoDict["hand"] = fixCards
+    hand = Hand(**mongoDict)
+    return hand
+
+def mongoPlayerDecoder(mongoDict):
+    #todo: in place repair hands array
+    fixHands = []
+    for hand in mongoDict["hands"]:
+        fixHands.append( mongoHandDecoder(hand))
+    mongoDict["hands"] = fixHands
+
+    mongoDict["currentHand"] =  mongoHandDecoder(mongoDict["currentHand"])
+    player = Player(**mongoDict)
+    return player
+
+#    return namedtuple('X', studentDict.keys())(*studentDict.values())
 
 
 if __name__ == '__main__':
-    test = {"test":1}
-
-    coll = LaunchCollConnection("Results","Players")
-    result = requestPlayerMongo(coll, "Floppy","123123123")
-
+    # test = {"test":1}
+    #
+    # coll = LaunchCollConnection("Results","Players")
+    # result = requestPlayerMongo(coll, "Floppy","123123123")
+    mongoDecoder(tempDict)
     #clears collection
     #coll.delete_many({})
 
