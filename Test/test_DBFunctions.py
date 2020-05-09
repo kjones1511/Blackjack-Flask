@@ -2,6 +2,7 @@ import unittest
 from DatabaseFunctions import *
 from bjObjects import *
 import json
+import copy
 
 tPath = '/Users/kjones/PycharmProjects/Blackjack4/Test/TestData/TestStateObjects.json'
 testDict = {}
@@ -24,16 +25,18 @@ class TestDBFunctions(unittest.TestCase):
 		self.assertIsNotNone(card, "Fails if new player not generated")
 		self.assertEqual(card,outcome,"expected cards aren't correct, failed to import")
 
+	#note: uses copy.copy to avoid dictionary mutable issues
 	def test_mongoHandDecoder(self):
-		hand = mongoHandDecoder(playerDoc["hands"][0])
+		hand = mongoHandDecoder(copy.copy(playerDoc["hands"][0]))
 		print(hand.hand[0])
 		self.assertEqual(hand.hand[0],Card("C",7),"expected cards aren't correct, failed to import")
 		self.assertTrue(hand.hitState==0,"should pass if hand hit 0 times")
 		self.assertTrue(hand.double==1, "should pass if hand did double")
 
+	#note: uses copy.copy to avoid dictionary mutable issuess
 	#todo: mutable issue again
 	def test_mongoPlayerDecoder(self):
-		player = mongoPlayerDecoder(playerDoc)
+		player = mongoPlayerDecoder(copy.copy(playerDoc))
 		self.assertIsNotNone(player, "Fails if new player not generated")
 		self.assertTrue(player.hands[0].hand[0].value==7,"fails if array of Hands not generated or first card != 7")
 		self.assertTrue(player.currentHand.hand[0].value==12,"fails if array of Hands not generated or first card != 7")
