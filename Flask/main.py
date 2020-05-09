@@ -1,6 +1,7 @@
 from API import *
 from flask import Flask, render_template, request, jsonify
 from bjObjects import *
+from DatabaseFunctions import *
 # Create some test data for our catalog in the form of a list of dictionaries.
 books = [
     {'id': 0,
@@ -37,10 +38,13 @@ def TestPost():
     else:
         return "Error: No id field provided. Please specify an id."
 
+@app.route('/addPlayer/<string:name>')
+def addPlayer(name):
+    #todo: make a function, logical to avoid duplicating results
+    coll = LaunchCollConnection("Results","Players")
+    initializePlayer(coll,name,"234234234")
+    return ("succeeded")
 
-@app.route('/api/v1/resources/books/all', methods=['GET'])
-def api_all():
-    return jsonify(books)
 
 @app.route("/about")
 def about():

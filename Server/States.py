@@ -7,6 +7,7 @@ import json
 # todo: move this function to a new gameStates file
 # todo: remember that currently function handles 1 player (in JSON), needs to handle array of players
 
+#todo: append UUID to playerDoc
 def startHand(players, deckCount):
 	#todo: figure out how to handle Dealer in dealFirstHand()
 	dealerHand = Hand()

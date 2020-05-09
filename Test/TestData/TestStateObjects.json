@@ -1,12 +1,23 @@
 {
 	"test1": {"name": "Julian", "message": "Posting JSON data to Flask!"},
 	"gameInfo": {
+		"ID": "edbd9d8a-9244-11ea-bb37-0242ac130002",
+		"state": "new",
+		"choice": "",
+		"casino": "La Casa De Mi Padre",
+		"deckCount": 2,
+		"dealerStandBoundary": 17,
+		"playerCookies": ["123123123"],
+		"deck": ""
+	},
+	"newGameInfo": {
+		"ID": "",
 		"state": "",
 		"choice": "",
 		"casino": "La Casa De Mi Padre",
 		"deckCount": 2,
 		"dealerStandBoundary": 17,
-		"playerCookies": ["ASDKASDSDKSADADKAKDS"],
+		"playerCookies": [],
 		"deck": ""
 	},
 	"playerDoc": {

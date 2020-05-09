@@ -1,17 +1,21 @@
 import json
 from pymongo import *
 from bjObjects import *
+import uuid
 import dns
+#todo if States works without this delete, doesnt seem to need pprints
 #import pprints
 
-
-tempDict = {'name': 'Floppy',
-            'cookie': '123123123',
-            'money': 1000,
-            'hands': [],
-            'currentHand': [
-                {'hand': [], 'blackjack': 0, 'win': 0, 'split': 0, 'double': 0, 'hitState': 0, 'dealerHand': [], 'dealerScore': 0, 'score': 0, 'originalScore': 0}
-            ]}
+defaultGameInfo = {
+	"ID": 0,
+	"state": "new",
+	"choice": "",
+	"casino": "La Casa De Mi Padre",
+	"deckCount": 2,
+	"dealerStandBoundary": 17,
+	"playerCookies": None,
+	"deck": ""
+	}
 
 # begin mongoDB connection, returns collection pointer
 def LaunchCollConnection(dbName, collName):
@@ -39,7 +43,8 @@ def objToDict(obj):
         result[key] = element
     return result
 
-    #should initialize to Players collection
+    #if player doesn't exist, should initialize new player ID to the Players collection
+    #returns True if successful
 def initializePlayer(coll, player,cookie):
     #todo: delete after added collection coll = LaunchCollConnection( "Players")
     result = coll.count_documents({"name": player, "cookie": cookie})
@@ -47,6 +52,24 @@ def initializePlayer(coll, player,cookie):
         tempPlayer = Player(player,cookie)
         playerJSON = objToDict(tempPlayer)
         coll.insert_one(playerJSON)
+        return True
+    return False
+
+def initializeGameInfo(coll,cookie):
+    id = uuid.uuid1()
+    defaultGameInfo["ID"] = id
+    defaultGameInfo["playerCookies"] = [cookie]
+    coll.insert_one(defaultGameInfo)
+    return id
+
+def updateGameInfo(coll, id, update):
+    coll.update_one({"ID": id}, {"$set": update})
+
+def updatePlayer(coll, cookie, update):
+    return
+    #filter = {"name:" name, "cookie": cookie}
+    #coll.update_one(filter,update)
+
 
     #todo: returns JSON currently, needs to return object
 def requestPlayerMongo(coll, player,cookie):
@@ -59,7 +82,6 @@ def requestPlayerMongo(coll, player,cookie):
 
     #will convert a dict Hand to Hand object, requires iterating over hand array
 def mongoCardDecoder(mongoDict):
-    print(mongoDict)
     card = Card(**mongoDict)
     return card
 
@@ -82,16 +104,7 @@ def mongoPlayerDecoder(mongoDict):
     player = Player(**mongoDict)
     return player
 
-#    return namedtuple('X', studentDict.keys())(*studentDict.values())
-
 
 if __name__ == '__main__':
-    # test = {"test":1}
-    #
-    # coll = LaunchCollConnection("Results","Players")
-    # result = requestPlayerMongo(coll, "Floppy","123123123")
-    mongoDecoder(tempDict)
-    #clears collection
-    #coll.delete_many({})
-
+    print("running main")
 
