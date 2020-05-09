@@ -32,7 +32,6 @@ class TestDBFunctions(unittest.TestCase):
 		self.assertTrue(logic,"failed to create a doc with unique ID and appended player cookie")
 
 	def test_updateGameInfo(self):
-		#todo: figure out storing UUID in JSON
 		#builds mock coll with 1 document
 		collection = mongomock.MongoClient().testDB.GameInfo
 		original = gameInfo

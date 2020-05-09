@@ -19,10 +19,8 @@ gameInfo = testDict["gameInfo"]
 
 class TestGame(unittest.TestCase):
     #expects dictionary to have appended 1 player object
-    def test_initializeOnePlayer(self):
-        initializePlayers(gameInfo, "TestBoy")
-        logicTest = gameInfo["players"][-1].name == "TestBoy"
-        self.assertTrue(logicTest, "Fails if no new player objects added")
+    def test_Deal(self):
+        self.fail()
 
 if __name__ == '__main__':
     unittest.main()

@@ -9,11 +9,6 @@ def initializeDeck(deckCount):
 #todo: DOESNT WORK, ONLY CREATES  1 player
 	#builds and adds player object to players array
 	#have optional playerName for sake of testing
-def initializePlayers(gameInfo, playerName = ""):
-	if playerName == "":
-		playerName = choice = input("Enter Player Name:  ")
-	gameInfo["players"].append(Player(playerName, 1000))
-	#todo point to authentication token instead of string
 
 def dealHand(players, dealerHand, deck):
 	# deal first hands
