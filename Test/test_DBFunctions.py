@@ -31,6 +31,7 @@ class TestDBFunctions(unittest.TestCase):
 		logic = results[0]["ID"] == id and len(results[0]["playerCookies"]) != 0
 		self.assertTrue(logic,"failed to create a doc with unique ID and appended player cookie")
 
+	#confirms update gameinfo works by changing the state field
 	def test_updateGameInfo(self):
 		#builds mock coll with 1 document
 		collection = mongomock.MongoClient().testDB.GameInfo
@@ -42,8 +43,23 @@ class TestDBFunctions(unittest.TestCase):
 		updateGameInfo(collection,id,update)
 
 		newDoc = collection.find()[0]
-		print(newDoc)
 		self.assertNotEqual(newDoc, original, "Update failed to happen if docs equal")
+
+	#confirms update of the player currentHand
+	def test_updatePlayer(self):
+		#builds mock coll with 1 document
+		collection = mongomock.MongoClient().testDB.Players
+		original = playerDoc
+		collection.insert_one(original)
+
+		cookie = original["cookie"]
+		diff = copy.copy(original)
+		diff["name"] = "madame Dame Judy Dench"
+		updatePlayer(collection,cookie,diff)
+
+		newDoc = collection.find()[0]
+		logic = (newDoc != original) and (newDoc["cookie"]==original["cookie"])
+		self.assertTrue(logic, "Update failed to happen if docs equal or cookie has changed")
 
 	def test_mongoCardDecoder(self):
 		card = mongoCardDecoder({'suit': 'H', 'value': 5})
@@ -53,15 +69,14 @@ class TestDBFunctions(unittest.TestCase):
 
 	#note: uses copy.copy to avoid dictionary mutable issues
 	def test_mongoHandDecoder(self):
-		hand = mongoHandDecoder(copy.copy(playerDoc["hands"][0]))
+		hand = mongoHandDecoder(copy.deepcopy(playerDoc["hands"][0]))
 		self.assertEqual(hand.hand[0],Card("C",7),"expected cards aren't correct, failed to import")
 		self.assertTrue(hand.hitState==0,"should pass if hand hit 0 times")
 		self.assertTrue(hand.double==1, "should pass if hand did double")
 
 	#note: uses copy.copy to avoid dictionary mutable issuess
-	#todo: mutable issue again
 	def test_mongoPlayerDecoder(self):
-		player = mongoPlayerDecoder(copy.copy(playerDoc))
+		player = mongoPlayerDecoder(copy.deepcopy(playerDoc))
 		self.assertIsNotNone(player, "Fails if new player not generated")
 		self.assertTrue(player.hands[0].hand[0].value==7,"fails if array of Hands not generated or first card != 7")
 		self.assertTrue(player.currentHand.hand[0].value==12,"fails if array of Hands not generated or first card != 7")

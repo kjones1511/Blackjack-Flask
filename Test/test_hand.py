@@ -37,10 +37,7 @@ class TestHand(unittest.TestCase):
         testHand = Hand()
         tDeck = Deck(2)
         testHand.deal(tDeck)
-        print(testHand)
         testHand.hit(tDeck)
-        print(testHand)
-        print(len(testHand.hand))
         self.assertEqual(len(testHand.hand), 3, "Fails if after 1 hit there aren't 3 cards")
 
 if __name__ == '__main__':

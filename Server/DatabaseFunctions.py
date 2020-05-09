@@ -66,25 +66,23 @@ def updateGameInfo(coll, id, update):
     coll.update_one({"ID": id}, {"$set": update})
 
 def updatePlayer(coll, cookie, update):
-    return
-    #filter = {"name:" name, "cookie": cookie}
-    #coll.update_one(filter,update)
+    coll.update_one({"cookie": cookie}, {"$set": update})
 
 
     #todo: returns JSON currently, needs to return object
-def requestPlayerMongo(coll, player,cookie):
-    result = coll.find({"name": player, "cookie": cookie},{"_id":0})
-    #if result.retrieved != 0:
-    for item in result:
-        print(item)
-
-#        print(item["currentHand"])
+def requestPlayerMongo(coll, cookie):
+    result = coll.find({"cookie": cookie},{"_id":0})
+    if result.count() == 1:
+        return result[0]
+    else:
+        print("failed to return exactly 1 result")
 
     #will convert a dict Hand to Hand object, requires iterating over hand array
 def mongoCardDecoder(mongoDict):
     card = Card(**mongoDict)
     return card
 
+    #todo: from testing around, doesn't look to work with empty hands
 def mongoHandDecoder(mongoDict):
     fixCards = []
     for card in mongoDict["hand"]:
@@ -94,7 +92,7 @@ def mongoHandDecoder(mongoDict):
     return hand
 
 def mongoPlayerDecoder(mongoDict):
-    #todo: in place repair hands array
+    #todo: find more elegant in-place repair of hands array
     fixHands = []
     for hand in mongoDict["hands"]:
         fixHands.append( mongoHandDecoder(hand))
@@ -106,5 +104,12 @@ def mongoPlayerDecoder(mongoDict):
 
 
 if __name__ == '__main__':
-    print("running main")
+    print("hello world")
+    # coll = LaunchCollConnection("Results","Players")
+    # deck = Deck(2)
+    # #result = coll.find({"name":"Donzox"}).count()
+    # result = requestPlayerMongo(coll,"ASDKASDSDKSADADKAKDS")
+    # player = mongoPlayerDecoder(result)
+    # player.currentHand.hit(deck)
+    # updatePlayer(coll,player.cookie,objToDict(player))
 
