@@ -4,7 +4,7 @@ from bjObjects import *
 def initializeDeck(deckCount):
 	deck = Deck(deckCount)
 	deck.shuffle()
-	return deckc
+	return deck
 
 #todo: DOESNT WORK, ONLY CREATES  1 player
 	#builds and adds player object to players array

@@ -6,6 +6,7 @@ import dns
 #todo if States works without this delete, doesnt seem to need pprints
 #import pprints
 
+#todo: currently used tup insert initialGameInfo, find a more apropriate home for this
 defaultGameInfo = {
 	"ID": 0,
 	"state": "new",

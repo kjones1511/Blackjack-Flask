@@ -3,11 +3,12 @@ from States import *
 import json
 
 tPath = '/Users/kjones/PycharmProjects/Blackjack4/Test/TestData/TestStateObjects.json'
-tJSON = {}
+testDict = {}
 with open(tPath) as file:
-	tJSON =json.load(file)
-
-#todo: build fixture with player array
+	testDict =json.load(file)
+gameInfo = testDict["gameInfo"]
+newGameInfo = testDict["newGameInfo"]
+newPlayerDoc = testDict["newPlayerDoc"]
 
 class TestStates(unittest.TestCase):
 
@@ -24,14 +25,25 @@ class TestStates(unittest.TestCase):
 		return
 
 	def test_stateHandler(self):
-		stateHandler("edbd9d8a-9244-11ea-bb37-0242ac130002")
+		#stateHandler("edbd9d8a-9244-11ea-bb37-0242ac130002")
 		self.fail()
 
 
-	#ensures player ends up with new hand,
+	#returned JSON should have new player & dealer cards
 	def test_startHand(self):
-		startHand()
-		self.fail()
+		#initial expected JSON should be a playerDoc with empty hand
+		logic1 = len( newPlayerDoc["currentHand"][0]["hand"] ) == 0
+		print( newPlayerDoc["currentHand"][0] )
+
+		self.assertTrue(logic1, "fails if test JSON has no hand field or hand is populated")
+		#returns with JSON to update
+		newPlayerJSON = startHand(newPlayerDoc, gameInfo)
+		print( newPlayerJSON)
+
+		logic2a = len( newPlayerJSON["currentHand"][0]["hand"] ) == 2
+		logic2b = len( newPlayerJSON["currentHand"][0]["dealerHand"][0]["hand"] ) == 2
+		logic2 = logic2a and logic2b
+		self.assertTrue(logic2, "fails if test JSON has not been updated with 2 cards for player & dealer")
 
 
 	def test_pushHit(self):

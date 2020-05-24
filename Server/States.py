@@ -8,41 +8,63 @@ import json
 # todo: remember that currently function handles 1 player (in JSON), needs to handle array of players
 
 #todo: currently points at Test DB
-collGameInfo = LaunchCollConnection("TestObjects","gameInfo")
-collPlayers = LaunchCollConnection("TestObjects","Players")
+DB = "TestObjects"
+collGameInfo = LaunchCollConnection(DB,"gameInfo")
+collPlayers = LaunchCollConnection(DB,"Players")
+ID = "edbd9d8a-9244-11ea-bb37-0242ac130002"
 
-	#doesn't request player data if state is wait
+
+#doesn't request player data if state is wait
 	#uses cookie to refer to 1 player, need to modify for multiple players
+	#runs each state, resets game state to wait afterwords
+def gameloop():
+	count = 0
+	notGameOver = True
+	while notGameOver:
+		stateHandler(ID)
+		time.sleep(.1)
+		count += 1
+		print(count)
+
+
 def stateHandler(ID):
-	gameInfo = requestGameStateMongo(collGameInfo, ID)
-	state = gameInfo["state"]
+	gameInfoJSON = requestGameStateMongo(collGameInfo, ID)
+	state = gameInfoJSON["state"]
 	if  state == "wait":
 		return state
-	print("cookie")
+
+	cookie = gameInfoJSON["playerCookies"][0]
+	playerJSON = requestPlayerMongo(collPlayers,cookie)
+	print(state)
+	if state == "startHand":
+		print("startHand state")
+		newplayerJSON = startHand(playerJSON, gameInfoJSON)
 	if state == "hit":
 		print("hit state")
-		pushHit(gameInfo)
-	return state
+
+	gameInfoJSON["state"] = "wait"
+	updateGameInfo(collGameInfo, ID, gameInfoJSON)
+	updatePlayer(collPlayers,cookie, newplayerJSON)
+	return "changed"
 
 #todo: append UUID to playerDoc
-def startHand(gameInfo):
-	deckCount = gameInfo["deckCount"]
-	cookie = gameInfo["playerCookies"][0]
-
-	#todo: figure out how to handle Dealer in dealFirstHand()
-	dealerHand = Hand()
-	mongoDict = requestPlayerMongo(collGameInfo, cookie)
-	player = mongoPlayerDecoder(mongoDict)
-
-	###INITIALIZE phase
-	#creates a deck, with deckCount decided by casino
+#todo: playerJSON is destroyed when decoding, find a more elegant solution
+#todo: record deck as game Info item, fix deck to populate from JSON
+def startHand(playerJSON, gameInfoJSON):
+	deckCount = gameInfoJSON["deckCount"]
+	#build player from JSON, make a deck, run function
+	player = mongoPlayerDecoder(playerJSON)
 	deck = initializeDeck(deckCount)
 	dealHand(player, deck)
+	#update JSON (gameInfo updated in top layer)
+	newPlayerJSON = objToDict(player)
+	return newPlayerJSON
+
 
 	#TODO add code to record decks
 
 
-def pushHit(gameInfo):
+def pushHit(playerJSON, gameInfoJSON):
 	playerCookies = gameInfo["playerCookies"]
 	players = []
 	for cookie in playerCookies:
@@ -58,3 +80,6 @@ def pushStand():
 
 def pushSplit():
 	return
+
+if __name__ == '__main__':
+	gameloop()

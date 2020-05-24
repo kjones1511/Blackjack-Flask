@@ -61,7 +61,7 @@ def testPlayer():
 					"originalScore":11,
 					"timestamp":"8/20/2020 2:40 PM"}
 			],
-			"currentHand":
+			"currentHand":[
 				{"hand":[{"suit":"C","value":12},{"suit":"H","value":5}],
 				"blackjack":0,
 					"win":0,
@@ -77,7 +77,7 @@ def testPlayer():
 					"score":23,
 					"originalScore":7,
 					"timestamp":"8/20/2020 2:40 PM"
-				}}}
+				}]}}
     response = jsonify(tJson)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return (response)
