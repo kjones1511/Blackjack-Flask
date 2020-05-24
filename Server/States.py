@@ -58,6 +58,7 @@ def startHand(playerJSON, gameInfoJSON):
 	dealHand(player, deck)
 	#update JSON (gameInfo updated in top layer)
 	newPlayerJSON = objToDict(player)
+	gameInfoJSON["deck"] = objToDict(deck)
 	return newPlayerJSON
 
 
@@ -67,8 +68,7 @@ def startHand(playerJSON, gameInfoJSON):
 def pushHit(playerJSON, gameInfoJSON):
 	playerCookies = gameInfo["playerCookies"]
 	players = []
-	for cookie in playerCookies:
-		players.append( )
+
 	return
 
 

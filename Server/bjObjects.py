@@ -63,8 +63,13 @@ class Hand:
 		self.hand.clear()
 		self.blackjack = 0
 		self.win = 0
+		self.split = 0
 		self.double = 0
-		self.state = 0
+		self.hitState = 0
+		self.score = 0
+		self.dealerScore = 0
+		self.originalScore = 0
+
 		self.deal(deck)
 
 	def deal(self, deck):
@@ -107,12 +112,13 @@ class Hand:
 		self.hand.append(card)
 
 class Deck:
-	def __init__(self, deckCount):
+	def __init__(self, deckCount, cards = None):
 		dSuit = ["C","H","S","D"]  * 13 * deckCount
 		dValue = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]*4 * deckCount
-		self.cards = []
-		for i in range(52*deckCount):
-			self.cards.append( Card(dSuit.pop(),dValue.pop()) )
+		if cards == None:
+			self.cards = []
+			for i in range(52*deckCount):
+				self.cards.append( Card(dSuit.pop(),dValue.pop()) )
 
 	def shuffle(self):
 		random.shuffle(self.cards)
