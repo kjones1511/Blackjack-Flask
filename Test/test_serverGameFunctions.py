@@ -22,12 +22,15 @@ newPlayer = testDict["newPlayerDoc"]
 class TestGame(unittest.TestCase):
 	#expects dictionary to have appended 1 player object
 	def test_dealHand(self):
-		coll = LaunchCollConnection("Results", "Players")
-		player = requestPlayerMongo(coll, "56565656565656")
-		print(player)
-		player = mongoPlayerDecoder(player)
-		print(player)
-		self.fail()
+		deck = Deck(2)
+		player = mongoPlayerDecoder(newPlayer)
+
+		logic1 = len(player.currentHand[0].hand) == 0 and len(player.currentHand[0].dealerHand) == 0
+		self.assertTrue(logic1, "fails if new player has cards or dealerHand is populated")
+
+		dealHand(player, deck)
+		logic2 = len( player.currentHand[0].hand ) == 2  and len( player.currentHand[0].dealerHand[0].hand ) == 2
+		self.assertTrue(logic2,"fails if new player/deal hand don't have 2 cards")
 
 
 if __name__ == '__main__':

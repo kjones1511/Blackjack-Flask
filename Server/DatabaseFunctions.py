@@ -80,6 +80,7 @@ def requestPlayerMongo(coll, cookie):
     else:
         print("failed to return exactly 1 result")
 
+#returns current Hand, doesn't work for old hands
 def requestHandMongo(coll, cookie):
     result = coll.find({"cookie": cookie}, {"_id": 0})
     if result.count() == 1:
@@ -115,18 +116,11 @@ def mongoPlayerDecoder(mongoDict):
         fixHands.append( mongoHandDecoder(hand))
     mongoDict["hands"] = fixHands
 
-    mongoDict["currentHand"] = mongoHandDecoder(mongoDict["currentHand"])
+    fixCurrentHand = []
+    for hand in mongoDict["currentHand"]:
+        fixCurrentHand.append( mongoHandDecoder(hand))
+    mongoDict["currentHand"] = fixCurrentHand
     player = Player(**mongoDict)
     return player
 
-
-if __name__ == '__main__':
-    print("hello world")
-    # coll = LaunchCollConnection("Results","Players")
-    # deck = Deck(2)
-    # #result = coll.find({"name":"Donzox"}).count()
-    # result = requestPlayerMongo(coll,"ASDKASDSDKSADADKAKDS")
-    # player = mongoPlayerDecoder(result)
-    # player.currentHand.hit(deck)
-    # updatePlayer(coll,player.cookie,objToDict(player))
 

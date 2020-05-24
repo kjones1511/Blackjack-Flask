@@ -64,11 +64,13 @@ class TestDBFunctions(unittest.TestCase):
 	def test_requestHandMongo(self):# coll, cookie):
 		# builds mock coll with 1 document
 		collection = mongomock.MongoClient().testDB.Players
-		collection.insert_one(playerDoc)
+		original = playerDoc
+		collection.insert_one(original)
 		cookie = original["cookie"]
 
 		result = requestHandMongo(collection, cookie)
-		logic = result.get("hands", None) == None and result["hand"][0]["value"] == 12
+		#get function tries to request a property from a player doc, fails if something is returned besides None
+		logic = result[0].get("hands", None) == None and result[0]["hand"][0]["value"] == 12
 		self.assertTrue(logic, "failed if a player doc is returned or the hand returned dooesn't have expected values")
 
 	def test_requestGameStateMongo(self):
@@ -98,6 +100,6 @@ class TestDBFunctions(unittest.TestCase):
 		player = mongoPlayerDecoder(copy.deepcopy(playerDoc))
 		self.assertIsNotNone(player, "Fails if new player not generated")
 		self.assertTrue(player.hands[0].hand[0].value==7,"fails if array of Hands not generated or first card != 7")
-		self.assertTrue(player.currentHand.hand[0].value==12,"fails if array of Hands not generated or first card != 7")
+		self.assertTrue(player.currentHand[0].hand[0].value==12,"fails if array of Hands not generated or first card != 7")
 
 

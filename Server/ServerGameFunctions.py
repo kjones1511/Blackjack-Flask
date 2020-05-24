@@ -14,8 +14,8 @@ def dealHand(player, deck):
 	# deal first hands
 	player.currentHand = [Hand()]
 	player.currentHand[0].newHand(deck)
-	player.currentHand.dealerHand.newHand(deck)
-
+	player.currentHand[0].dealerHand =  [Hand()]
+	player.currentHand[0].dealerHand[0].newHand(deck)
 
 #if happy with print, delete comments
 def print_results(dealerHand, player_hand): #name, hand):

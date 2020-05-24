@@ -38,7 +38,7 @@
 					"originalScore":11,
 					"timestamp":"8/20/2020 2:40 PM"}
 			],
-			"currentHand":
+			"currentHand": [
 				{"hand":[{"suit":"C","value":12},{"suit":"H","value":5}],
 				"blackjack":0,
 					"win":0,
@@ -54,24 +54,24 @@
 					"score":23,
 					"originalScore":7,
 					"timestamp":"8/20/2020 2:40 PM"
-				}},
+				}]},
 	"newPlayerDoc": {
-		'name': 'Testo',
-		'cookie': '56565656565656',
-		'money': 1000,
-		'hands': [],
-		'currentHand': [
-			{'hand': [],
-				'blackjack': 0,
-				'win': 0,
-				'split': 0,
-				'double': 0,
-				'hitState': 0,
-				'dealerHand': [],
-				'dealerScore': 0,
-				'score': 0,
-				'originalScore': 0,
-				'timestamp': ''
+		"name": "Testo",
+		"cookie": "56565656565656",
+		"money": 1000,
+		"hands": [],
+		"currentHand": [
+			{"hand": [],
+				"blackjack": 0,
+				"win": 0,
+				"split": 0,
+				"double": 0,
+				"hitState": 0,
+				"dealerHand": [],
+				"dealerScore": 0,
+				"score": 0,
+				"originalScore": 0,
+				"timestamp": ""
 			}]}
 
 	}
