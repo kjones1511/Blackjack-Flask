@@ -61,6 +61,25 @@ class TestDBFunctions(unittest.TestCase):
 		logic = (newDoc != original) and (newDoc["cookie"]==original["cookie"])
 		self.assertTrue(logic, "Update failed to happen if docs equal or cookie has changed")
 
+	def test_requestHandMongo(self):# coll, cookie):
+		# builds mock coll with 1 document
+		collection = mongomock.MongoClient().testDB.Players
+		collection.insert_one(playerDoc)
+		cookie = original["cookie"]
+
+		result = requestHandMongo(collection, cookie)
+		logic = result.get("hands", None) == None and result["hand"][0]["value"] == 12
+		self.assertTrue(logic, "failed if a player doc is returned or the hand returned dooesn't have expected values")
+
+	def test_requestGameStateMongo(self):
+		# builds mock coll with 1 document
+		collection = mongomock.MongoClient().testDB.gameInfo
+		collection.insert_one(gameInfo)
+
+		result = requestGameStateMongo(collection, gameInfo["ID"])
+		logic = result["ID"] == gameInfo["ID"] and result["state"] == gameInfo["state"]
+		self.assertTrue(logic, "failed if gameInfo dictionary isn't returned")
+
 	def test_mongoCardDecoder(self):
 		card = mongoCardDecoder({'suit': 'H', 'value': 5})
 		outcome = Card("H",5)

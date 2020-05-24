@@ -23,19 +23,31 @@ class TestStates(unittest.TestCase):
 	def launchTable(self):
 		return
 
+	def test_stateHandler(self):
+		stateHandler("edbd9d8a-9244-11ea-bb37-0242ac130002")
+		self.fail()
+
+
 	#ensures player ends up with new hand,
 	def test_startHand(self):
 		startHand()
 		self.fail()
 
-	def startHand(players, data, casino, deckCount):
-		# todo: figure out how to handle Dealer in dealFirstHand()
-		dealerHand = Hand()
-		# todo: add JS message welcoming start of game
-		###INITIALIZE phase
-		# creates a deck, with deckCount decided by casino
-		deck = initializeDeck(deckCount)
-		dealHand(players, dealerHand, deck)
+
+	def test_pushHit(self):
+		self.fail()
+
+
+	def test_pushDouble(self):
+		self.fail()
+
+
+	def test_pushStand(self):
+		self.fail()
+
+
+	def test_pushSplit(self):
+		self.fail()
 
 # TODO add code to record decks
 

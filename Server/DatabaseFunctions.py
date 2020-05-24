@@ -55,6 +55,7 @@ def initializePlayer(coll, player,cookie):
         return True
     return False
 
+#todo: test GameInfo
 def initializeGameInfo(coll,cookie):
     id = uuid.uuid1()
     defaultGameInfo["ID"] = id
@@ -62,6 +63,8 @@ def initializeGameInfo(coll,cookie):
     coll.insert_one(defaultGameInfo)
     return id
 
+
+#todo: add unit test
 def updateGameInfo(coll, id, update):
     coll.update_one({"ID": id}, {"$set": update})
 
@@ -72,6 +75,20 @@ def updatePlayer(coll, cookie, update):
     #todo: returns JSON currently, needs to return object
 def requestPlayerMongo(coll, cookie):
     result = coll.find({"cookie": cookie},{"_id":0})
+    if result.count() == 1:
+        return result[0]
+    else:
+        print("failed to return exactly 1 result")
+
+def requestHandMongo(coll, cookie):
+    result = coll.find({"cookie": cookie}, {"_id": 0})
+    if result.count() == 1:
+        return result[0]["currentHand"]
+    else:
+            print("failed to return exactly 1 result")
+
+def requestGameStateMongo(coll, ID):
+    result = coll.find({"ID": ID}, {"_id": 0})
     if result.count() == 1:
         return result[0]
     else:
@@ -98,7 +115,7 @@ def mongoPlayerDecoder(mongoDict):
         fixHands.append( mongoHandDecoder(hand))
     mongoDict["hands"] = fixHands
 
-    mongoDict["currentHand"] =  mongoHandDecoder(mongoDict["currentHand"])
+    mongoDict["currentHand"] = mongoHandDecoder(mongoDict["currentHand"])
     player = Player(**mongoDict)
     return player
 

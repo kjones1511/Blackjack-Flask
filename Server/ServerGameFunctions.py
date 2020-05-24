@@ -10,12 +10,11 @@ def initializeDeck(deckCount):
 	#builds and adds player object to players array
 	#have optional playerName for sake of testing
 
-def dealHand(players, dealerHand, deck):
+def dealHand(player, deck):
 	# deal first hands
-	for player in players:
-		player.currentHand = [Hand()]
-		player.currentHand[0].newHand(deck)
-	dealerHand.newHand(deck)
+	player.currentHand = [Hand()]
+	player.currentHand[0].newHand(deck)
+	player.currentHand.dealerHand.newHand(deck)
 
 
 #if happy with print, delete comments

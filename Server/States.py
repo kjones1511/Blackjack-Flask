@@ -7,31 +7,54 @@ import json
 # todo: move this function to a new gameStates file
 # todo: remember that currently function handles 1 player (in JSON), needs to handle array of players
 
+#todo: currently points at Test DB
+collGameInfo = LaunchCollConnection("TestObjects","gameInfo")
+collPlayers = LaunchCollConnection("TestObjects","Players")
+
+	#doesn't request player data if state is wait
+	#uses cookie to refer to 1 player, need to modify for multiple players
+def stateHandler(ID):
+	gameInfo = requestGameStateMongo(collGameInfo, ID)
+	state = gameInfo["state"]
+	if  state == "wait":
+		return state
+	print("cookie")
+	if state == "hit":
+		print("hit state")
+		pushHit(gameInfo)
+	return state
+
 #todo: append UUID to playerDoc
-def startHand(players, deckCount):
+def startHand(gameInfo):
+	deckCount = gameInfo["deckCount"]
+	cookie = gameInfo["playerCookies"][0]
+
 	#todo: figure out how to handle Dealer in dealFirstHand()
 	dealerHand = Hand()
-	#todo: add JS message welcoming start of game
+	mongoDict = requestPlayerMongo(collGameInfo, cookie)
+	player = mongoPlayerDecoder(mongoDict)
+
 	###INITIALIZE phase
 	#creates a deck, with deckCount decided by casino
 	deck = initializeDeck(deckCount)
-	dealHand(players, dealerHand, deck)
+	dealHand(player, deck)
 
 	#TODO add code to record decks
 
-	#TODO: 1 second of initially showing cards
 
-def pushHit(self):
-	self.fail()
-
-
-def pushDouble(self):
-	self.fail()
-
-
-def pushStand(self):
-	self.fail()
+def pushHit(gameInfo):
+	playerCookies = gameInfo["playerCookies"]
+	players = []
+	for cookie in playerCookies:
+		players.append( )
+	return
 
 
-def pushSplit(self):
-	self.fail()
+def pushDouble():
+	return
+
+def pushStand():
+	return
+
+def pushSplit():
+	return
