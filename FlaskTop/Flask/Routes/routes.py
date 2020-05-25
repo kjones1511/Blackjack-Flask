@@ -19,7 +19,7 @@ def json():
 
 @app.route('/hit', methods=["POST"])
 def hit():
-    return APIGameStateChange(request, "hit")
+	return APIGameStateChange(request, "hit")
 
 @app.route('/double', methods=["POST"])
 def double():

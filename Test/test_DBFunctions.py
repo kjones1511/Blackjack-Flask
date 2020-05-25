@@ -88,6 +88,11 @@ class TestDBFunctions(unittest.TestCase):
 		self.assertIsNotNone(card, "Fails if new player not generated")
 		self.assertEqual(card,outcome,"expected cards aren't correct, failed to import")
 
+	def test_mongoDeckDecoder(self):
+		deck = mongoDeckDecoder(gameInfo)
+		self.assertIsNotNone(deck, "Fails if new deck not generated")
+		self.assertEqual(deck.cards[0], Card("C",10),"expected cards aren't correct, failed to import")
+
 	#note: uses copy.copy to avoid dictionary mutable issues
 	def test_mongoHandDecoder(self):
 		hand = mongoHandDecoder(copy.deepcopy(playerDoc["hands"][0]))

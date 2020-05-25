@@ -26,7 +26,7 @@ def gameloop():
 		count += 1
 		print(count)
 
-
+#todo: quirk, playerJSON is mutated when decoding, need a new JSOON dictionary for recording
 def stateHandler(ID):
 	gameInfoJSON = requestGameStateMongo(collGameInfo, ID)
 	state = gameInfoJSON["state"]
@@ -40,7 +40,7 @@ def stateHandler(ID):
 		print("startHand state")
 		newplayerJSON = startHand(playerJSON, gameInfoJSON)
 	if state == "hit":
-		print("hit state")
+		newplayerJSON = pushHit(playerJSON, gameInfoJSON)
 
 	gameInfoJSON["state"] = "wait"
 	updateGameInfo(collGameInfo, ID, gameInfoJSON)
@@ -48,8 +48,9 @@ def stateHandler(ID):
 	return "changed"
 
 #todo: append UUID to playerDoc
-#todo: playerJSON is destroyed when decoding, find a more elegant solution
+#todo: (repeat of todo in main loop) playerJSON is destroyed when decoding, find a more elegant solution
 #todo: record deck as game Info item, fix deck to populate from JSON
+#todo: doesn't address blackjack or splits
 def startHand(playerJSON, gameInfoJSON):
 	deckCount = gameInfoJSON["deckCount"]
 	#build player from JSON, make a deck, run function
@@ -61,15 +62,17 @@ def startHand(playerJSON, gameInfoJSON):
 	gameInfoJSON["deck"] = objToDict(deck)
 	return newPlayerJSON
 
-
-	#TODO add code to record decks
-
-
+	#todo: assuming gameInfo will break on pushhit
+	#will add card and calculate new score
 def pushHit(playerJSON, gameInfoJSON):
-	playerCookies = gameInfo["playerCookies"]
-	players = []
+	player = mongoPlayerDecoder(playerJSON)
+	deck = mongoDeckDecoder(gameInfoJSON)
+	player.currentHand[0].hit(deck)
+	player.currentHand[0].newScore()
 
-	return
+	newPlayerJSON = objToDict(player)
+	gameInfoJSON["deck"] = objToDict(deck)
+	return newPlayerJSON
 
 
 def pushDouble():

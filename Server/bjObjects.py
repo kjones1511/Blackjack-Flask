@@ -107,6 +107,9 @@ class Hand:
 				total += int(card)
 		return total
 
+	def newScore(self):
+		self.score = self.total()
+
 	def hit(self, deck):
 		card = deck.pop()
 		self.hand.append(card)
@@ -119,6 +122,8 @@ class Deck:
 			self.cards = []
 			for i in range(52*deckCount):
 				self.cards.append( Card(dSuit.pop(),dValue.pop()) )
+		else:
+			self.cards = cards
 
 	def shuffle(self):
 		random.shuffle(self.cards)

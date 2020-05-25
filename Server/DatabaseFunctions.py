@@ -110,6 +110,13 @@ def mongoHandDecoder(mongoDict):
     hand = Hand(**mongoDict)
     return hand
 
+def mongoDeckDecoder(mongoDict):
+    fixCards = []
+    for card in mongoDict["deck"]["cards"]:
+        fixCards.append(mongoCardDecoder(card))
+    deck = Deck(mongoDict["deckCount"],fixCards)
+    return deck
+
 def mongoPlayerDecoder(mongoDict):
     #todo: find more elegant in-place repair of hands array
     fixHands = []

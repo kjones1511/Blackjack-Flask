@@ -7,14 +7,11 @@ testDict = {}
 with open(tPath) as file:
 	testDict =json.load(file)
 gameInfo = testDict["gameInfo"]
+playerDoc = testDict["playerDoc"]
 newGameInfo = testDict["newGameInfo"]
 newPlayerDoc = testDict["newPlayerDoc"]
 
 class TestStates(unittest.TestCase):
-
-	#todo: make part of a fixture
-	def test_JSONDataLoads(self):
-		self.assertEqual(tJSON['test1'], {'name': 'Julian', 'message': 'Posting JSON data to Flask!'}, "test JSON didn't load")
 
 	#for later
 	def signIn(self):
@@ -47,7 +44,17 @@ class TestStates(unittest.TestCase):
 
 
 	def test_pushHit(self):
-		self.fail()
+		deckSize = len( gameInfo["deck"]["cards"])
+		oldScore = playerDoc["currentHand"][0]["score"]
+
+		newPlayerDoc = pushHit(playerDoc, gameInfo)
+		deckSizeChange  = len( gameInfo["deck"]["cards"]) - deckSize
+		scoreChange = newPlayerDoc["currentHand"][0]["score"] - oldScore
+
+		logic1 = len (newPlayerDoc["currentHand"][0]["hand"]) == 3
+		logic2 = deckSizeChange == -1
+		logic3 = scoreChange !=0
+		self.assertTrue(logic1 and logic2 and logic3, "fails if player has less than 3 cards, or if deck size isn't reduced by 1")
 
 
 	def test_pushDouble(self):
