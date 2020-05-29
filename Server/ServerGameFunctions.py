@@ -17,6 +17,9 @@ def dealHand(player, deck):
 	player.currentHand[0].dealerHand =  [Hand()]
 	player.currentHand[0].dealerHand[0].newHand(deck)
 
+	player.currentHand[0].newScore()
+	player.currentHand[0].dealerHand[0].newScore()
+
 def checkGameover(newplayerJSON, gameInfoJSON):
 
 	pass

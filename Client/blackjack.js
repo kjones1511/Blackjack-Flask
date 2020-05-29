@@ -160,7 +160,7 @@ var BlackjackJS = (function() {
 			var gameStateJSON = jsonRetrieve(urlGameState);  
 			console.log(playerJSON)			
 			
-			var dealerScore = playerJSON.currentHand[0].dealerScore;
+			var dealerScore = playerJSON.currentHand[0].dealerHand[0].score;
 			var playerScore = playerJSON.currentHand[0].score;
 			var dealerHand = playerJSON.currentHand[0].dealerHand[0].hand;
 			var playerHand = playerJSON.currentHand[0].hand;
