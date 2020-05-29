@@ -1,0 +1,49 @@
+{
+    "testCard": 
+    {"suit":"C","value":7},
+    "gameInfo": {
+		"ID": "edbd9d8a-9244-11ea-bb37-0242ac130002",
+		"state": "new",
+		"choice": "",
+		"casino": "La Casa De Mi Padre",
+		"deckCount": 2,
+		"dealerStandBoundary": 17,
+		"playerCookies": ["123123123"],
+		"deck": ""
+	},
+	"playerDoc": {
+			"name":"Kody",
+			"cookie":"ASDKASDSDKSADADKAKDS",
+			"money": 5555,
+			"hands":[
+				{"hand":
+				[{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"C","value":12}],
+					"blackjack":0,
+					"win":1,
+					"split":0,
+					"double":1,
+					"hitState":0,
+					"dealerHand":[{"suit":"H","value":8},{"suit":"C","value":9}],
+					"dealerScore":17,
+					"score":21,
+					"originalScore":11,
+					"timestamp":"8/20/2020 2:40 PM"}
+			],
+			"currentHand":
+				{"hand":[{"suit":"C","value":12},{"suit":"H","value":5}],
+				"blackjack":0,
+					"win":0,
+					"split":0,
+					"double":0,
+					"hitState":1,
+					"dealerHand":[
+						{"suit":"H","value":12},
+						{"suit":"D","value":6},
+						{"suit":"C","value":8}
+					],
+					"dealerScore":24,
+					"score":23,
+					"originalScore":7,
+					"timestamp":"8/20/2020 2:40 PM"
+				}}
+	}

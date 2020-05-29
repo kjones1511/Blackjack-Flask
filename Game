@@ -1,7 +1,0 @@
-#git repository /Users/kjones/PycharmProjects/Blackjack/.git/
-
-def game():
-    print("hello world")
-
-if __name__ == "__main__":
-    game()

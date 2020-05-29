@@ -1,11 +1,87 @@
 {
 	"test1": {"name": "Julian", "message": "Posting JSON data to Flask!"},
 	"gameInfo": {
+		"ID":"edbd9d8a-9244-11ea-bb37-0242ac130002",
+		"state":"wait",
+		"choice":"",
+		"casino":"La Casa De Mi Padre",
+		"deckCount":2,
+		"dealerStandBoundary":17,
+		"playerCookies":["56565656565656"],
+		"deck": {
+			"cards":[
+				{"suit":"C","value":10},{"suit":"H","value":6},{"suit":"S","value":8},{"suit":"D","value":9},{"suit":"D","value":8},{"suit":"D","value":2},{"suit":"H","value":11},{"suit":"H","value":12},{"suit":"H","value":5},{"suit":"H","value":3},{"suit":"H","value":7},{"suit":"S","value":6},{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"H","value":3},{"suit":"D","value":8},{"suit":"C","value":14},{"suit":"H","value":14},{"suit":"C","value":9},{"suit":"C","value":5},{"suit":"S","value":13},{"suit":"D","value":13},{"suit":"S","value":13},{"suit":"S","value":3},{"suit":"D","value":11},{"suit":"H","value":2},{"suit":"H","value":12},{"suit":"H","value":6},{"suit":"S","value":10},{"suit":"D","value":2},{"suit":"C","value":2},{"suit":"H","value":4},{"suit":"C","value":12},{"suit":"H","value":14},{"suit":"C","value":8},{"suit":"H","value":10},{"suit":"D","value":13},{"suit":"C","value":13},{"suit":"C","value":10},{"suit":"C","value":4},{"suit":"H","value":9},{"suit":"H","value":8},{"suit":"S","value":2},{"suit":"D","value":3},{"suit":"C","value":13},{"suit":"H","value":11},{"suit":"H","value":4},{"suit":"D","value":14},{"suit":"C","value":9},{"suit":"C","value":6},{"suit":"C","value":2},{"suit":"H","value":10},{"suit":"S","value":2},{"suit":"S","value":4},{"suit":"S","value":5},{"suit":"C","value":3},{"suit":"S","value":10},{"suit":"S","value":14},{"suit":"D","value":6},{"suit":"D","value":11},{"suit":"S","value":12},{"suit":"S","value":6},{"suit":"C","value":5},{"suit":"S","value":5},{"suit":"S","value":9},{"suit":"S","value":7},{"suit":"H","value":5},{"suit":"D","value":3},{"suit":"S","value":7},{"suit":"H","value":13},{"suit":"D","value":4},{"suit":"C","value":6},{"suit":"C","value":14},{"suit":"D","value":6},{"suit":"H","value":13},{"suit":"H","value":8},{"suit":"D","value":10},{"suit":"D","value":12},{"suit":"S","value":8},{"suit":"D","value":14},{"suit":"D","value":7},{"suit":"S","value":14},{"suit":"D","value":10},{"suit":"D","value":5},{"suit":"S","value":3},{"suit":"C","value":3},{"suit":"D","value":4},{"suit":"C","value":11},{"suit":"H","value":9},{"suit":"S","value":11},{"suit":"H","value":7},{"suit":"S","value":4},{"suit":"S","value":12},{"suit":"D","value":9},{"suit":"D","value":7},{"suit":"C","value":11},{"suit":"S","value":9},{"suit":"C","value":8},{"suit":"C","value":7},{"suit":"D","value":5}
+			]}},
+	"gameInfo2": {
+		"ID":"edbd9d8a-9244-11ea-bb37-0242ac130002",
+		"state":"wait",
+		"choice":"",
+		"casino":"La Casa De Mi Padre",
+		"deckCount":2,
+		"dealerStandBoundary":17,
+		"playerCookies":["56565656565656"],
+		"deck": {
+			"cards":[
+				{"suit":"C","value":10},{"suit":"H","value":6},{"suit":"S","value":8},{"suit":"D","value":9},{"suit":"D","value":8},{"suit":"D","value":2},{"suit":"H","value":11},{"suit":"H","value":12},{"suit":"H","value":5},{"suit":"H","value":3},{"suit":"H","value":7},{"suit":"S","value":6},{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"H","value":3},{"suit":"D","value":8},{"suit":"C","value":14},{"suit":"H","value":14},{"suit":"C","value":9},{"suit":"C","value":5},{"suit":"S","value":13},{"suit":"D","value":13},{"suit":"S","value":13},{"suit":"S","value":3},{"suit":"D","value":11},{"suit":"H","value":2},{"suit":"H","value":12},{"suit":"H","value":6},{"suit":"S","value":10},{"suit":"D","value":2},{"suit":"C","value":2},{"suit":"H","value":4},{"suit":"C","value":12},{"suit":"H","value":14},{"suit":"C","value":8},{"suit":"H","value":10},{"suit":"D","value":13},{"suit":"C","value":13},{"suit":"C","value":10},{"suit":"C","value":4},{"suit":"H","value":9},{"suit":"H","value":8},{"suit":"S","value":2},{"suit":"D","value":3},{"suit":"C","value":13},{"suit":"H","value":11},{"suit":"H","value":4},{"suit":"D","value":14},{"suit":"C","value":9},{"suit":"C","value":6},{"suit":"C","value":2},{"suit":"H","value":10},{"suit":"S","value":2},{"suit":"S","value":4},{"suit":"S","value":5},{"suit":"C","value":3},{"suit":"S","value":10},{"suit":"S","value":14},{"suit":"D","value":6},{"suit":"D","value":11},{"suit":"S","value":12},{"suit":"S","value":6},{"suit":"C","value":5},{"suit":"S","value":5},{"suit":"S","value":9},{"suit":"S","value":7},{"suit":"H","value":5},{"suit":"D","value":3},{"suit":"S","value":7},{"suit":"H","value":13},{"suit":"D","value":4},{"suit":"C","value":6},{"suit":"C","value":14},{"suit":"D","value":6},{"suit":"H","value":13},{"suit":"H","value":8},{"suit":"D","value":10},{"suit":"D","value":12},{"suit":"S","value":8},{"suit":"D","value":14},{"suit":"D","value":7},{"suit":"S","value":14},{"suit":"D","value":10},{"suit":"D","value":5},{"suit":"S","value":3},{"suit":"C","value":3},{"suit":"D","value":4},{"suit":"C","value":11},{"suit":"H","value":9},{"suit":"S","value":11},{"suit":"H","value":7},{"suit":"S","value":4},{"suit":"S","value":12},{"suit":"D","value":9},{"suit":"D","value":7},{"suit":"C","value":11},{"suit":"S","value":9},{"suit":"C","value":8},{"suit":"C","value":7},{"suit":"D","value":5}
+			]}},
+	"newGameInfo": {
+		"ID": "",
 		"state": "",
 		"choice": "",
 		"casino": "La Casa De Mi Padre",
 		"deckCount": 2,
 		"dealerStandBoundary": 17,
-		"player": ""
+		"playerCookies": [],
+		"deck": ""
+	},
+	"playerDoc": {
+			"name":"Kody",
+			"cookie":"ASDKASDSDKSADADKAKDS",
+			"money": 5555,
+			"hands":[
+				{"hand":
+				[{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"C","value":12}],
+					"blackjack":0,
+					"win":1,
+					"split":0,
+					"double":1,
+					"hitState":0,
+					"dealerHand":[{"hand":[{"suit":"S","value":14},{"suit":"C","value":7}],"blackjack":0,"win":0,"split":0,"double":0,"hitState":0,"dealerHand":[],"dealerScore":0,"score":0,"originalScore":18,"timestamp":""}],
+					"dealerScore":17,
+					"score":21,
+					"originalScore":11,
+					"timestamp":"8/20/2020 2:40 PM"}
+			],
+			"currentHand": [
+				{"hand":[{"suit":"C","value":12},{"suit":"H","value":5}],
+				"blackjack":0,
+					"win":0,
+					"split":0,
+					"double":0,
+					"hitState":1,
+					"dealerHand":[{"hand":[{"suit":"S","value":14},{"suit":"C","value":7}],"blackjack":0,"win":0,"split":0,"double":0,"hitState":0,"dealerHand":[],"dealerScore":0,"score":0,"originalScore":18,"timestamp":""}],
+					"dealerScore":18,
+					"score":15,
+					"originalScore":15,
+					"timestamp":"8/20/2020 2:40 PM"
+				}]},
+	"newPlayerDoc": {
+		"name": "Testo",
+		"cookie": "56565656565656",
+		"money": 1000,
+		"hands": [],
+		"currentHand": [
+			{"hand": [],
+				"blackjack": 0,
+				"win": 0,
+				"split": 0,
+				"double": 0,
+				"hitState": 0,
+				"dealerHand": [],
+				"dealerScore": 0,
+				"score": 0,
+				"originalScore": 0,
+				"timestamp": ""
+			}]},
+	"deck":{"cards":[{"suit":"C","value":10},{"suit":"H","value":6},{"suit":"S","value":8},{"suit":"D","value":9},{"suit":"D","value":8},{"suit":"D","value":2},{"suit":"H","value":11},{"suit":"H","value":12},{"suit":"H","value":5},{"suit":"H","value":3},{"suit":"H","value":7},{"suit":"S","value":6},{"suit":"C","value":7},{"suit":"C","value":4},{"suit":"H","value":3},{"suit":"D","value":8},{"suit":"C","value":14},{"suit":"H","value":14},{"suit":"C","value":9},{"suit":"C","value":5},{"suit":"S","value":13},{"suit":"D","value":13},{"suit":"S","value":13},{"suit":"S","value":3},{"suit":"D","value":11},{"suit":"H","value":2},{"suit":"H","value":12},{"suit":"H","value":6},{"suit":"S","value":10},{"suit":"D","value":2},{"suit":"C","value":2},{"suit":"H","value":4},{"suit":"C","value":12},{"suit":"H","value":14},{"suit":"C","value":8},{"suit":"H","value":10},{"suit":"D","value":13},{"suit":"C","value":13},{"suit":"C","value":10},{"suit":"C","value":4},{"suit":"H","value":9},{"suit":"H","value":8},{"suit":"S","value":2},{"suit":"D","value":3},{"suit":"C","value":13},{"suit":"H","value":11},{"suit":"H","value":4},{"suit":"D","value":14},{"suit":"C","value":9},{"suit":"C","value":6},{"suit":"C","value":2},{"suit":"H","value":10},{"suit":"S","value":2},{"suit":"S","value":4},{"suit":"S","value":5},{"suit":"C","value":3},{"suit":"S","value":10},{"suit":"S","value":14},{"suit":"D","value":6},{"suit":"D","value":11},{"suit":"S","value":12},{"suit":"S","value":6},{"suit":"C","value":5},{"suit":"S","value":5},{"suit":"S","value":9},{"suit":"S","value":7},{"suit":"H","value":5},{"suit":"D","value":3},{"suit":"S","value":7},{"suit":"H","value":13},{"suit":"D","value":4},{"suit":"C","value":6},{"suit":"C","value":14},{"suit":"D","value":6},{"suit":"H","value":13},{"suit":"H","value":8},{"suit":"D","value":10},{"suit":"D","value":12},{"suit":"S","value":8},{"suit":"D","value":14},{"suit":"D","value":7},{"suit":"S","value":14},{"suit":"D","value":10},{"suit":"D","value":5},{"suit":"S","value":3},{"suit":"C","value":3},{"suit":"D","value":4},{"suit":"C","value":11},{"suit":"H","value":9},{"suit":"S","value":11},{"suit":"H","value":7},{"suit":"S","value":4},{"suit":"S","value":12},{"suit":"D","value":9},{"suit":"D","value":7},{"suit":"C","value":11},{"suit":"S","value":9},{"suit":"C","value":8},{"suit":"C","value":7},{"suit":"D","value":5}]}
 	}
-}

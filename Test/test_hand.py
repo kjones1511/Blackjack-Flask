@@ -4,7 +4,8 @@ from bjObjects import *
 
 #class TestHand(TestCase):
 class TestHand(unittest.TestCase):
-    
+
+        #todo: what does broken Hand() return?
     def test_newHand(self):
         testHand = Hand()
         self.assertIsNotNone(testHand,"Fails if new hand not generated")

@@ -34,26 +34,42 @@ class Card:
 		return NotImplemented
 
 class Hand:
-	def __init__(self):
-		self.hand = []
+	# def __init__(self, *initial_data, **kwargs):
+	# 	for dictionary in initial_data:
+	# 		for key in dictionary:
+	# 			setattr(self, key, dictionary[key])
+	# 	for key in kwargs:
+	# 		setattr(self, key, kwargs[key])
+
+	#todo: current initializate unelegant
+	def __init__(self, hand=None, blackjack = 0, win = 0, split =0, double = 0, hitState =0, dealerHand = [], dealerScore = 0, score =0, originalScore =0, timestamp = ""):
+		if hand is None:
+			hand = []
+		self.hand = hand
 		#todo: re-add datetime once mDB implemented. Currently, won't work with lambda dict collapse
 		#self.startTime = datetime.now(tz=None)
-		self.blackjack = 0
-		self.win = 0
-		self.split = 0
-		self.double = 0
-		self.hitState = 0 # 0 if stand, 1 if hit
-		self.dealerHand = []
-		self.dealerScore = 0
-		self.score = 0
-		self.originalScore = 0
+		self.blackjack = blackjack
+		self.win = win
+		self.split = split
+		self.double = double
+		self.hitState = hitState # 0 if stand, 1 if hit
+		self.dealerHand = dealerHand
+		self.dealerScore = dealerScore
+		self.score = score
+		self.originalScore = originalScore
+		self.timestamp = timestamp
 
 	def newHand(self,deck):
 		self.hand.clear()
 		self.blackjack = 0
 		self.win = 0
+		self.split = 0
 		self.double = 0
-		self.state = 0
+		self.hitState = 0
+		self.score = 0
+		self.dealerScore = 0
+		self.originalScore = 0
+
 		self.deal(deck)
 
 	def deal(self, deck):
@@ -91,17 +107,23 @@ class Hand:
 				total += int(card)
 		return total
 
+	def newScore(self):
+		self.score = self.total()
+
 	def hit(self, deck):
 		card = deck.pop()
 		self.hand.append(card)
 
 class Deck:
-	def __init__(self, deckCount):
+	def __init__(self, deckCount, cards = None):
 		dSuit = ["C","H","S","D"]  * 13 * deckCount
 		dValue = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]*4 * deckCount
-		self.cards = []
-		for i in range(52*deckCount):
-			self.cards.append( Card(dSuit.pop(),dValue.pop()) )
+		if cards == None:
+			self.cards = []
+			for i in range(52*deckCount):
+				self.cards.append( Card(dSuit.pop(),dValue.pop()) )
+		else:
+			self.cards = cards
 
 	def shuffle(self):
 		random.shuffle(self.cards)
@@ -114,12 +136,16 @@ class Deck:
 		return self.cards.pop()
 
 class Player:
-	def __init__(self, name, initial_money):
-		self.cookie = 0
+	def __init__(self, name, cookie = "1", money = 1000, hands=None, currentHand=None):
+		if hands is None:
+			hands = []
+		if currentHand is None:
+			currentHand = [Hand()]
 		self.name = name
-		self.hands = []
-		self.currentHand = [Hand()] #will be array of hands, starts with 1 due to needing to access element 0
-		self.money = initial_money
+		self.cookie = cookie
+		self.money = money
+		self.hands = hands
+		self.currentHand = currentHand #will be array of hands, starts with 1 due to needing to access element 0
 
 	#handIndex assumes moving through currentHand index in ascending order
 	def split(self, handIndex,deck):

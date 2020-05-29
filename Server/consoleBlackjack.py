@@ -1,4 +1,4 @@
-from GameFunctions import *
+from ConsoleGameFunctions import *
 from DatabaseFunctions import *
 
 # initialize
