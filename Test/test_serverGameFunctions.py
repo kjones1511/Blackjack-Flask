@@ -32,6 +32,10 @@ class TestGame(unittest.TestCase):
 		logic2 = len( player.currentHand[0].hand ) == 2  and len( player.currentHand[0].dealerHand[0].hand ) == 2
 		self.assertTrue(logic2,"fails if new player/deal hand don't have 2 cards")
 
+	#will return True if busted, standing, or dealer has a blackjack
+	def test_checkGameover(self):
+		self.fail()
+
 
 if __name__ == '__main__':
 	unittest.main()

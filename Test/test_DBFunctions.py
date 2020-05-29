@@ -9,6 +9,7 @@ tPath = '/Users/kjones/PycharmProjects/Blackjack4/Test/TestData/TestStateObjects
 testDict = {}
 with open(tPath) as file:
 	testDict =json.load(file)
+
 gameInfo = testDict["gameInfo"]
 newGameInfo = testDict["newGameInfo"]
 playerDoc = testDict["playerDoc"]

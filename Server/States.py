@@ -21,31 +21,57 @@ def gameloop():
 	count = 0
 	notGameOver = True
 	while notGameOver:
-		stateHandler(ID)
+		stateHandler(ID, collGameInfo, collPlayers)
 		time.sleep(.1)
 		count += 1
 		print(count)
 
+def gameONEloop():
+	count = 0
+	stateHandler(ID)
+	time.sleep(.1)
+	count += 1
+	print(count)
+
 #todo: quirk, playerJSON is mutated when decoding, need a new JSOON dictionary for recording
-def stateHandler(ID):
-	gameInfoJSON = requestGameStateMongo(collGameInfo, ID)
+def stateHandler(ID, collGame, collPlayer):
+	#check game state from GameInfo collection
+	gameInfoJSON = requestGameStateMongo(collGame, ID)
 	state = gameInfoJSON["state"]
 	if  state == "wait":
 		return state
 
 	cookie = gameInfoJSON["playerCookies"][0]
-	playerJSON = requestPlayerMongo(collPlayers,cookie)
-	print(state)
+	playerJSON = requestPlayerMongo(collPlayer,cookie)
+	stateCalled = "changed"
 	if state == "startHand":
+		stateCalled = state
 		print("startHand state")
 		newplayerJSON = startHand(playerJSON, gameInfoJSON)
-	if state == "hit":
+	elif state == "hit":
+		stateCalled = state
 		newplayerJSON = pushHit(playerJSON, gameInfoJSON)
+	elif state == "gameOver":
+		stateCalled = state
+		resolveHand(playerJSON, gameInfoJSON)
+	elif state == "split":
+		stateCalled = state
+		pass
+	elif state == "double":
+		stateCalled = state
+		pass
+	elif state == "stand":
+		stateCalled = state
+		pass
+	if checkGameover(newplayerJSON, gameInfoJSON):
+		gameInfoJSON["state"] = "gameOver"
+	else:
+		gameInfoJSON["state"] = "wait"
 
-	gameInfoJSON["state"] = "wait"
-	updateGameInfo(collGameInfo, ID, gameInfoJSON)
-	updatePlayer(collPlayers,cookie, newplayerJSON)
-	return "changed"
+	#update related DB records
+	updateGameInfo(collGame, ID, gameInfoJSON)
+	updatePlayer(collPlayer,cookie, newplayerJSON)
+	return stateCalled
 
 #todo: append UUID to playerDoc
 #todo: (repeat of todo in main loop) playerJSON is destroyed when decoding, find a more elegant solution
@@ -69,6 +95,7 @@ def pushHit(playerJSON, gameInfoJSON):
 	deck = mongoDeckDecoder(gameInfoJSON)
 	player.currentHand[0].hit(deck)
 	player.currentHand[0].newScore()
+	player.currentHand[0].hitState = 1
 
 	newPlayerJSON = objToDict(player)
 	gameInfoJSON["deck"] = objToDict(deck)
