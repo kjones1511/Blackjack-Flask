@@ -1,5 +1,4 @@
 from ConsoleGameFunctions import *
-from DatabaseFunctions import *
 
 # initialize
 choice = ""
@@ -18,7 +17,6 @@ dealerStandBoundary = 17
 
 def game():
 	#get mongoDB collection pointer
-	coll = LaunchCollConnection()
 
 	#todo: figure out how to handle Dealer in dealFirstHand()
 	dealerHand = Hand()
@@ -69,62 +67,23 @@ def game():
 				#check for winner
 				score(dealerHand, thisHand)
 
-				#compress hand to JSON, append to dictionary
+				#compress hand to JSON, append to dictionary. For saving to file eventually
 				x = json.dumps(thisHand.__dict__, default=lambda o: o.__dict__)
 				data["hands"].append(  json.loads(x)  )
 
-				#TODO: unless i decide to compress the whole player, this line is unecessary
-				player.hands.append(thisHand)
-
-				time.sleep(2.5)
+				time.sleep(2)
 
 			choice = input("Do you want to [C]ontinue or [Q]uit: ").lower()
 			if choice == "q":
-				#pushes data JSON to collection, todo make this work for mult players by requesting data per player
-				coll.insert_one( data )
 				players.remove( player )
-				print("Goodbye" + player.name + "!")
-				#print(data)
+				print("Goodbye " + player.name + " !")
+				print(data)
+				time.sleep(2)
 
 		#deal new hands
 		dealHand(players, dealerHand, deck)
-		# for player in players:
-		# 	player.currentHand = [Hand()]
-		# 	player.currentHand[0].newHand(deck)
-		# dealerHand.newHand(deck)
 		clear()
 	exit()
-
-def test():
-	client = MongoClient(
-		"mongodb+srv://root:chicago1%21@blackjackanalytics-idjco.mongodb.net/Results?retryWrites=true&w=majority&authSource=admin")
-	db = client.Results
-	coll = db.TestColResults
-
-	player = Player("kile", 100)
-	card1 = Card("S", 7)
-	card2 = Card("D", 7)
-	card3 = Card("D", 7)
-	deck = Deck(2)
-	deck.shuffle()
-	hand = Hand()
-	player.currentHand.append(hand)
-	player.currentHand[0].hand = [card1, card2, card3]
-
-	data = {
-		"player": "take2",
-		"casino": "",
-		"hands": []  # format of each hand. timestamp, playerHand Arr, dealerHand Arr, win (1/0), #hits, #doubles
-	}
-
-	for hand in player.currentHand:
-		data = json.dumps(player.__dict__, default=lambda o: o.__dict__)
-		coll.insert_one(data)
-
-
-# print( vars(card1) )
-# print(vars(player.currentHand[0]))
-
 
 if __name__ == "__main__":
 	game()

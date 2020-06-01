@@ -1,4 +1,3 @@
-import random
 from bjObjects import *
 
 def initializeDeck(deckCount):
