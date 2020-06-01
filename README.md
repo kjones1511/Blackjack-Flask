@@ -4,7 +4,6 @@ Notes for Jake
 -check out BJObjects to get an idea of structure
 -play the consoleBlackjack.py main function to see console version of the game
 
-
 Required packages (version not critical):
 Flask	1.1.2	1.1.2
 Flask-Cors	3.0.8	3.0.8
